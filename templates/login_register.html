@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{%load crispy_forms_tags %}
+
+{% block title %}{% if create %}Register{% else %}Login{% endif %}{% endblock %}
+
+{% block content %}
+    {% if create %}<h2>Register User</h2>{% else %}<h2>Login User</h2>{% endif %}
+    <hr>
+
+    <form method="post">
+    {% csrf_token %}
+        {{ form|crispy }}
+
+        {% if create %}
+            <button class="btn btn-primary" type="submit">Register</button>
+        {% else %}
+            <button class="btn btn-primary" type="submit">Login</button>
+        {% endif %}
+    </form>
+{% endblock %}

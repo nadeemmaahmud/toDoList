@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{%load crispy_forms_tags %}
+
+{% block title %}{% if create %}Create{% else %}Update{% endif %}{% endblock %}
+
+{% block content %}
+    {% if create %}
+        <h2>Create Task</h2>
+    {% else %}
+    	<h2>Update Task</h2>
+    {% endif %}
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        {% if create %}
+            <button class="btn btn-primary" type="submit">Create</button>
+        {% else %}
+            <button class="btn btn-primary" type="submit">Update</button>
+        {% endif %}
+    </form>
+{% endblock %}

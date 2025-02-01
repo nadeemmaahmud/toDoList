@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+        <h2>What to do!</h2>
+        <a type="submit" class="btn btn-primary" href="{% url 'create' %}"><i class="bi bi-plus-square"></i> Create</a>
+    </div>
+    <hr>
+
+    {% if tasks %}
+    	{% for task in tasks %}
+            <div style="padding-top: 15px">
+                <div class="card text-center">
+                  <div class="card-header">
+                      {{ task.category }}
+                  </div>
+                  <div class="card-body">
+                      <h5 class="card-title">{{ task.name }}</h5>
+                      <p class="card-text">Priority : {{ task.priority }} Status : {{ task.status }}</p>
+                      <a href="{% url 'update' id=task.id %}" class="btn btn-success">Update</a>
+                      <a href="{% url 'delete' id=task.id %}" class="btn btn-danger">Delete</a>
+                  </div>
+                  <div style="display: inline-flex; justify-content: space-between; align-items: center;" class="card-footer text-body-secondary">
+                      <p>Created at : {{ task.created_at }}</p>
+                      <p>Deadline : {{ task.deadline }}</p>
+                      <p>Updated at : {{ task.updated_at }}</p>
+                  </div>
+                </div>
+            </div>
+    	{% endfor %}
+    {% else %}
+    	<h2>No tasks available...</h2>
+    {% endif %}
+{% endblock %}
